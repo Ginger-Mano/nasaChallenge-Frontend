@@ -8,7 +8,8 @@ class App extends Component {
 
  state = {
    apodData: [],
-   clicked: false
+   clicked: false,
+   existingLikes: []
  }
 
  componentDidMount() {
