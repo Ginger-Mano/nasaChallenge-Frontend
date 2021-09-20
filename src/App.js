@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React, {Component} from "react"
+import Card from "./Card"
 import './App.css';
 
-function App() {
+
+
+class App extends Component {
+
+ state = {
+   apodData: [],
+   clicked: false
+ }
+
+ componentDidMount() {
+  fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_API_KEY}`)
+  .then(res => res.json())
+  .then(resData => this.setState({
+    apodData: resData 
+  }))
+
+ }
+
+ clickedLike = (evt) => {
+  console.log(evt)
+ }
+
+
+
+
+
+  render() {
+    console.log(this.state.apodData.copyright)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Spacestagram</h2>
+      <Card data={this.state.apodData} clicked={this.state.clicked} clickEvent={this.clickedLike}/>
     </div>
   );
+  }
 }
 
 export default App;
