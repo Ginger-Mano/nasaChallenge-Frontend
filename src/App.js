@@ -1,7 +1,6 @@
-import React, {Component} from "react"
-import Card from "./Card"
+import React, {Component} from "react";
+import CardData from "./CardData";
 import './App.css';
-
 
 
 class App extends Component {
@@ -21,20 +20,62 @@ class App extends Component {
 
  }
 
- clickedLike = (evt) => {
-  console.log(evt)
+
+likeArr = (() => {
+  fetch(`http://localhost:3000/likes`)
+  .then(res => res.json())
+  .then(arrayOfLikes => this.setState({
+    existingLikes: arrayOfLikes 
+  }))
+ })()
+
+
+ clickedLike = () => {
+  fetch(`http://localhost:3000/likes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      like_count: this.state.existingLikes.length + 1
+    })
+  })
+  .then(res => res.json())
+  .then(newLike => {
+    this.setState({
+      existingLikes: [...this.state.existingLikes, newLike]
+    })
+  })
  }
 
 
-
+deleteLikes = () => {
+  let like = this.state.existingLikes.pop()
+  
+  fetch(`http://localhost:3000/likes/${like.id}`, {
+    method: "DELETE"
+  })
+  .then(res => res.json())
+  .then((deletedLike) => {
+    let leftoverLikes = this.state.existingLikes.filter(likes => likes !== like)
+    this.setState({
+      existingLikes: leftoverLikes
+    })
+  })
+}
 
 
   render() {
-    console.log(this.state.apodData.copyright)
   return (
     <div className="App">
+
       <h2>Spacestagram</h2>
-      <Card data={this.state.apodData} clicked={this.state.clicked} clickEvent={this.clickedLike}/>
+
+      <CardData data={this.state.apodData} 
+                clickedLike={this.clickedLike} 
+                likeArr={this.state.existingLikes} 
+                clickEvent={this.clickedLike} 
+                deletedLikes={this.deleteLikes}/>
     </div>
   );
   }
