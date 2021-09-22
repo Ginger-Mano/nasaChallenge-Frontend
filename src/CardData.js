@@ -4,10 +4,10 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import { green, pink } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Grid from '@material-ui/core/Grid';
 
 function CardData(props) {
@@ -30,8 +30,8 @@ function CardData(props) {
                                          NASA
                             </Avatar>
                              }
-                                    title={<Typography sx={{fontSize: 20}} style={{fontWeight: 500}}>{props.data.title}</Typography>}
-                                    subheader={<Typography sx={{fontSize: 20}}>{props.data.date}</Typography>}
+                                    title={<h1 className="text1">{props.data.title}</h1>}
+                                    subheader={<h3 className="text">{props.data.date}</h3>}
                 />
            
             
@@ -45,7 +45,7 @@ function CardData(props) {
                         {props.data.explanation}
                 </CardContent>
 
-                <CardContent>
+                <CardContent style={{fontWeight: 500}}>
                         {props.data.copyright}
                 </CardContent>
             
@@ -58,7 +58,7 @@ function CardData(props) {
         <Card>
             <Grid  container 
                     columns={3}
-                    spacing={4}
+                    spacing={8}
                     alignItems="center"
                     justify="center">
 
@@ -66,18 +66,29 @@ function CardData(props) {
                 <Button variant="contained" 
                         startIcon={<FavoriteIcon/>} 
                         color="error" 
-                        onClick={props.clickEvent}>
+                        onClick={props.clickedLike}>
                         Like
                 </Button>
             </Grid>
 
             <Grid item>
-                <Button variant="contained" 
+            {props.unliked ?  
+            
+            <Button variant="contained" 
+                        startIcon={<ThumbDownIcon/>}
+                        disabled={true} 
                         onClick={props.deletedLikes}
                         sx={{ bgcolor: pink[500]}} >
-                        
+                        Unlike
+                </Button> :
+
+            <Button variant="contained" 
+                        startIcon={<ThumbDownIcon/>} 
+                        onClick={props.deletedLikes}
+                        sx={{ bgcolor: pink[500]}} >
                         Unlike
                 </Button>
+            }
             </Grid>
 
             <Grid item>

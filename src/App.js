@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import AppBar from '@mui/material/AppBar';
 import CardData from "./CardData";
-import { pink } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
+import Grid from '@material-ui/core/Grid';
 import './App.css';
 
-const sound = new Audio('https://freesound.org/data/previews/399/399934_1676145-lq.mp3')
+const sound1 = new Audio('https://freesound.org/data/previews/399/399934_1676145-lq.mp3')
+const sound2 = new Audio('https://freesound.org/data/previews/376/376038_1676145-lq.mp3')
 
 class App extends Component {
 
@@ -49,7 +51,7 @@ likeArr = (() => {
       existingLikes: [...this.state.existingLikes, newLike]
     })
   })
-  sound.play()
+  sound1.play()
  }
 
 
@@ -63,9 +65,11 @@ deleteLikes = () => {
   .then((deletedLike) => {
     let leftoverLikes = this.state.existingLikes.filter(likes => likes !== like)
     this.setState({
-      existingLikes: leftoverLikes
+      existingLikes: leftoverLikes,
+      clicked: true
     })
   })
+  sound2.play()
 }
 
 
@@ -73,16 +77,19 @@ deleteLikes = () => {
   return (
     <div className="root">
 
-      <AppBar position="static" sx={{ bgcolor: pink}}>
-      <h2 className="title">SPACESTAGRAM</h2>
+      <AppBar position="static" 
+              sx={{ backgroundColor: blue}}>  
+
+              <h2 className="title">SPACESTAGRAM - <span className="span">View NASA's API Photo of the Day</span> </h2>
+
       </AppBar>
 
-      <div className="spacer"></div>
+        <div className="spacer"></div>
 
       <CardData data={this.state.apodData} 
                 clickedLike={this.clickedLike} 
                 likeArr={this.state.existingLikes} 
-                clickEvent={this.clickedLike} 
+                unliked={this.state.clicked} 
                 deletedLikes={this.deleteLikes}/>
 
     </div>

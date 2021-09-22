@@ -16,6 +16,22 @@
   padding-left: 20px;
 }
 
+.title2 {
+  text-align: right;
+  font-family: 'Trebuchet MS';
+  font-size: 15px;
+  padding-left: 500px;
+}
+
 .spacer {
   padding: 20px
+}
+
+.text1 {
+  font-family: 'Trebuchet MS';
+  font-size: 25px;
+}
+
+.span {
+  color: black
 }
