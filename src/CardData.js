@@ -24,12 +24,13 @@ function CardData(props) {
                 <Grid item>
                     <Card sx={{maxWidth: 800}}>
                         <CardHeader avatar={
-                            <Avatar sx={{ bgcolor: green[500]}} 
-                                    aria-label="nasa">
+                            <Avatar 
+                                    aria-label="nasa"
+                                    src="http://www.nasa.gov/sites/default/files/images/nasaLogo-570x450.png">
                                          NASA
                             </Avatar>
                              }
-                                    title={<Typography sx={{fontSize: 20, fontWeight: 50}} style={{fontWeight: 500}}>{props.data.title}</Typography>}
+                                    title={<Typography sx={{fontSize: 20}} style={{fontWeight: 500}}>{props.data.title}</Typography>}
                                     subheader={<Typography sx={{fontSize: 20}}>{props.data.date}</Typography>}
                 />
            
@@ -52,6 +53,9 @@ function CardData(props) {
                 </Grid>
              </Grid>
 
+             <div className="spacer"></div>
+
+        <Card>
             <Grid  container 
                     columns={3}
                     spacing={4}
@@ -79,8 +83,10 @@ function CardData(props) {
             <Grid item>
                 {props.clickedLike ? <p>{props.likeArr.length} people have liked this photo today</p>: null}
             </Grid>
+            
 
-        </Grid>
+            </Grid>
+        </Card>
 
     </div>
     )

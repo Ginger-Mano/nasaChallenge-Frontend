@@ -1,7 +1,10 @@
 import React, {Component} from "react";
+import AppBar from '@mui/material/AppBar';
 import CardData from "./CardData";
+import { pink } from '@mui/material/colors';
 import './App.css';
 
+const sound = new Audio('https://freesound.org/data/previews/399/399934_1676145-lq.mp3')
 
 class App extends Component {
 
@@ -46,6 +49,7 @@ likeArr = (() => {
       existingLikes: [...this.state.existingLikes, newLike]
     })
   })
+  sound.play()
  }
 
 
@@ -67,15 +71,20 @@ deleteLikes = () => {
 
   render() {
   return (
-    <div className="App">
+    <div className="root">
 
-      <h2>Spacestagram</h2>
+      <AppBar position="static" sx={{ bgcolor: pink}}>
+      <h2 className="title">SPACESTAGRAM</h2>
+      </AppBar>
+
+      <div className="spacer"></div>
 
       <CardData data={this.state.apodData} 
                 clickedLike={this.clickedLike} 
                 likeArr={this.state.existingLikes} 
                 clickEvent={this.clickedLike} 
                 deletedLikes={this.deleteLikes}/>
+
     </div>
   );
   }

@@ -1,9 +1,21 @@
-.App {
+.root {
   text-align: center;
-  background-color: lavender;
-  max-height: 100%;
+  background-color: rgb(231, 231, 231);
+  position: absolute;
+  width: 100%;
+  top: 0px;
 }
 
 .maincard {
   text-align: center;
+}
+
+.title {
+  text-align: left;
+  font-family: 'Trebuchet MS';
+  padding-left: 20px;
+}
+
+.spacer {
+  padding: 20px
 }
